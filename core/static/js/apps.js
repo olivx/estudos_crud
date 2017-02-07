@@ -73,8 +73,6 @@ $(function(){
     // load page
 
     //  search bottom
-
-
         $('.js-search-btn').click(function(){
 
            var form = $('.js-search-form');

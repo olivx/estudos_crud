@@ -18,8 +18,7 @@ in front-end like angular but this is not my focus for now.
 - create search bar with pagination
 - set pagination
 - create tests(i need more focus on this)
-- CBV
--
+
 
 ### working it
 ```
