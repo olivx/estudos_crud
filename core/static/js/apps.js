@@ -70,6 +70,10 @@ $(function(){
         $('#table-book').on('click', '.js-delete-btn' , loadBookForm);
         $('#modal-book').on('submit' , '.js-delete-form', saveBookForm);
 
+    // load page
+
+    //  search bottom
+
 
         $('.js-search-btn').click(function(){
 
@@ -81,6 +85,8 @@ $(function(){
                 data:  form.serialize(),
                 success: function(data){
                     $('#table-book tbody').html(data.html_table);
+                    $('#pagination').html(data.html_pagination);
+
 
                 },
            });

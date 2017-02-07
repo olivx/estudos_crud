@@ -24,10 +24,15 @@ def paginate(request, books_list, per_page=3):
 
 
 def book_list(request):
-    print(request.GET)
-    books_list = Books.objects.all()
-    books = paginate(request, books_list)
-    return render(request, 'books.html', {'book_list': books})
+    if 'search' in request.GET:
+        books_list = Books.objects.filter(Q(author__icontains=request.GET.get('search')) |
+                                          Q(title__icontains=request.GET.get('search'))).order_by('title')
+        books = paginate(request, books_list)
+        return render(request, 'books.html', {'book_list': books})
+    else:
+        books_list = Books.objects.all()
+        books = paginate(request, books_list)
+        return render(request, 'books.html', {'book_list': books})
 
 
 def book_search(request):
@@ -35,8 +40,10 @@ def book_search(request):
     if 'search' in request.GET:
         books_list = Books.objects.filter(Q(author__icontains=request.GET.get('search')) |
                                           Q(title__icontains=request.GET.get('search'))).order_by('title')
-        books  = paginate(request, books_list)
+        books = paginate(request, books_list)
+
         data['html_table'] = render_to_string('partial/book_table.html', {'book_list': books}, request=request)
+        data['html_pagination'] = render_to_string('partial/pagination_book.html',{'book_list': books}, request=request)
     return JsonResponse(data)
 
 

@@ -1,0 +1,24 @@
+{% if book_list.has_other_pages %}
+<ul class="pagination">
+    <!-- navega para traz  -->
+    {% if book_list.has_previous %}
+    <li><a href="?page={{ book_list.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    <!-- cria lista de pagina -->
+    {% for i in book_list.paginator.page_range %}
+    {% if book_list.number == i %}
+    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+    {% else %}
+    <li><a href="?page={{ i }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ i }}</a></li>
+    {% endif %}
+    {% endfor %}
+    <!-- navega para frente-->
+    {% if book_list.has_next %}
+    <li><a href="?page={{ book_list.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+{% endif %}
