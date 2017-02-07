@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block container %}
+
+<h1 class="page-header">Books </h1>
+<div class="row spacer" >
+    {% if user.is_authenticated %}
+
+    <div class="col-md-6">
+        <button id="add-new" class="btn btn-lg btn-primary "  data-url="{% url 'book_save' %}">
+            <span class="glyphicon glyphicon-plus "></span>
+            Cadastrar
+        </button>
+    </div>
+    {% endif %}
+    <form class="js-search-form" metod="get" action="{% url 'book_search' %}">
+        <div class="pull-right col-md-6">
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+
+                    <input id="search-book" name="search" type="text" class="form-control" placeholder="Pesquisar" />
+
+                    <span class="input-group-btn">
+
+                        <button class="btn btn-info js-search-btn" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<span></span>
+
+<table id="table-book" class="table table-striped">
+
+    <thead>
+    <tr>
+        <td>#</td>
+        <td>Author</td>
+        <td>Title</td>
+        <td>Published</td>
+        <td>Type Book</td>
+        <td>Price</td>
+        <td>Pages</td>
+        {% if user.is_authenticated %}
+        <td></td>
+        <td></td>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+
+    {% include 'partial/book_table.html' %}
+
+    </tbody>
+
+</table>
+
+{% if book_list.has_other_pages %}
+<ul class="pagination">
+    <!-- navega para traz  -->
+    {% if book_list.has_previous %}
+    <li><a href="?page={{ book_list.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    <!-- cria lista de pagina -->
+    {% for i in book_list.paginator.page_range %}
+    {% if book_list.number == i %}
+    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+    {% else %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+    {% endfor %}
+    <!-- navega para frente-->
+    {% if book_list.has_next %}
+    <li><a href="?page={{ book_list.next_page_number }}">&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+{% endif %}
+<!-- modal generic -->
+<div class="modal fade" id="modal-book">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+
+        </div><!-- modal content  -->
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+
+{% block java_script_app %}
+<script src="{% static 'js/apps.js' %}"></script>
+
+{% endblock %}

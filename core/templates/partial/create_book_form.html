@@ -1,0 +1,21 @@
+<form action="{% url 'book_save' %}" method="post" class="js-create-form">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> x </button>
+        <h4 class="modal-title"> ADD New Book </h4>
+    </div>
+
+    <div class="modal-body">
+        {% csrf_token %}
+
+        {% include 'partial/book_form.html'%}
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        <button class="btn btn-primary">Salvar</button>
+    </div>
+
+
+</form>
+

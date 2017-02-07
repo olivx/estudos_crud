@@ -1,0 +1,87 @@
+{% load widget_tweaks %}
+
+<!-- author -->
+<div class="control-group {% if form.author.errors%} has-error {% endif %}">
+    <label for="{{ form.author.id_for_label }}"> {{ form.author.label }}  </label>
+    {% render_field form.author class="form-control" %}
+    {% for error in form.author.errors %}
+    <p class="help-block">{{ error }}</p>
+    {% endfor %}
+
+</div>
+
+<!--title -->
+<div class="control-group {% if form.title.errors%} has-error {% endif %}">
+    <label for="{{ form.title.id_for_label }}"> {{ form.title.label }}  </label>
+    {% render_field form.title class="form-control" %}
+    {% for error in form.title.errors %}
+    <p class="help-block">{{ error }}</p>
+    {% endfor %}
+
+</div>
+<div class="row">
+
+    <div class="col-md-6 ">
+        <!--pages -->
+        <div class="control-group {% if form.pages.errors%} has-error {% endif %}">
+            <label for="{{ form.pages.id_for_label }}"> {{ form.pages.label }}  </label>
+            {% render_field form.pages class="form-control" %}
+            {% for error in form.pages.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="col-md-6 ">
+        <!--price -->
+        <div class="control-group {% if form.price.errors%} has-error {% endif %}">
+            <label for="{{ form.price.id_for_label }}"> {{ form.price.label }}  </label>
+            {% render_field form.price class="form-control" %}
+            {% for error in form.price.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 ">
+        <!--published-->
+        <div class="control-group {% if form.published.errors%} has-error {% endif %}">
+            <label for="{{ form.published.id_for_label }}"> {{ form.published.label }}  </label>
+            {% render_field form.published class="form-control calender" %}
+            {% for error in form.published.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <!--book type-->
+        <div class="control-group {% if form.type_book.errors%} has-error {% endif %}">
+            <label for="{{ form.book_type.id_for_label }}"> {{ form.type_book.label }}  </label>
+            {% render_field form.type_book class="form-control" %}
+            {% for error in form.book_type.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+
+        </div>
+    </div>
+</div><!-- container -->
+<!--description-->
+<div class="control-group {% if form.description.errors%} has-error {% endif %}">
+    <label for="{{ field.id_for_label }}"> {{ form.description.label }}  </label>
+    {% render_field form.description class="form-control" rows="3" %}
+    {% for error in form.description.errors %}
+    <p class="help-block">{{ error }}</p>
+    {% endfor %}
+
+</div>
+
+
+
+
+
+

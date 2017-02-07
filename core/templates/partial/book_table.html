@@ -1,0 +1,38 @@
+{%for book in book_list %}
+<tr>
+    <td>{{ book.id }}</td>
+    <td>{{ book.author|upper }}</td>
+    <td>{{ book.title|upper }}</td>
+    <td>{{ book.published|date:"d /m /y"  }}</td>
+    <td>{{ book.get_type_book_display|upper }}</td>
+    <td>{{ book.price }}</td>
+    <td>{{ book.pages }}</td>
+    <td></td>
+    <td></td>
+
+    {% if user.is_authenticated %}
+    <td>
+        <button class="btn btn-small btn-warning js-update-btn" data-url="{% url 'book_update' book.pk %}" >
+            <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+    </td>
+
+    <td>
+        <button class="btn btn-small btn-danger js-delete-btn" data-url="{% url 'book_delete' book.pk %}">
+            <span class="glyphicon glyphicon-trash"></span>
+        </button>
+    </td>
+    {% endif %}
+
+</tr>
+
+{% empty %}
+<tr>
+    <td colspan="9" class="btn btn-small bg-warning text-center">
+        Não há Livros
+    </td>
+</tr>
+
+{% endfor %}
+
+
