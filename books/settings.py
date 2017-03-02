@@ -24,8 +24,6 @@ SECRET_KEY = 'rh1f6=6+ud1*!k==mv(_i4wb$@m&=jqj7d_-4diuyek6h%h^5='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,9 +36,11 @@ INSTALLED_APPS = [
 
     # third apps
     'test_without_migrations',
+    'django_extensions',
     'widget_tweaks',
 
     # my apps
+    'accounts',
     'core',
 ]
 
@@ -119,8 +119,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# custom user model
+AUTH_USER_MODEL = 'accounts.User'
+
+# allowed hosts
+ALLOWED_HOSTS = []
+
+# login url configurations
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/book/list/'
 
 
-STATIC_URL = '/static/'
+# send mail configurations
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.techcd.com.br'
+EMAIL_HOST_USER = 'thiago@techcd.com.br'
+EMAIL_HOST_PASSWORD = 'mmnhbn'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True

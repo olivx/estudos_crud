@@ -1,0 +1,4 @@
+Hi , {{ user.username }} !
+please to join us and compete your register you need to confirm this e-mail , clicking in link below !!!
+
+http://{{ domain }}{% url 'account_confirm' uidb64=uid token=token %}

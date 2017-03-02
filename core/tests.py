@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from accounts.models import User
 from django.test import TestCase
 
 from django.shortcuts import resolve_url as r
@@ -23,9 +23,9 @@ class TestHome(TestCase):
 
 class TestBooksViews(TestCase):
     def setUp(self):
-        self.user = User.objects.create_superuser(username='olvx', email='oliveiravicente.net@gmail.com',
-                                                  password='logan277')
-        self.client.login(username='olvx', password='logan277')
+        self.user = User.objects.create_superuser(username='thiago', email='oliveiravicente.net@gmail.com',password='logan277')
+
+        self.client.login(email='oliveiravicente.net@gmail.com', password='logan277')
         self.resp = self.client.get(r('book_list'))
 
     def test_get_book_list(self):
