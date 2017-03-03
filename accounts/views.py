@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login as django_login, authenticate
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
@@ -7,7 +7,7 @@ from django.contrib.sites.shortcuts import get_current_site
 
 from accounts.models import User
 from accounts.tokens import account_token_generator
-from accounts.forms import RegisterForm
+from accounts.forms import RegisterForm, AuthenticanUserForm
 
 
 def account_register(request):
@@ -37,7 +37,6 @@ def account_register(request):
 
 
 def account_confirm(request, uidb64, token):
-
     pk = urlsafe_base64_decode(force_text(uidb64))
     user = get_object_or_404(User, pk=pk)
 
@@ -47,11 +46,24 @@ def account_confirm(request, uidb64, token):
         user.save()
 
         login(request, user)
-        context = {'email_confirmation' : user.profile.email_confirmation }
+        context = {'email_confirmation': user.profile.email_confirmation}
         return render(request, 'thanks.html', context)
 
     else:
         return render(request, 'invalid_token.hmtl')
 
 
+def login(request, template_name='registration/login.html'):
+    if request.POST:
+        form = AuthenticanUserForm(request.POST)
+        form.is_valid()
+        user = authenticate(email=request.POST['email'], password=request.POST['password'])
+        print(user)
+        if user is not None:
+            if user.is_active and user.profile.email_confirmation:
+                django_login(request, user)
+                return render(request, 'index.html')
 
+    else:
+        form = AuthenticanUserForm()
+    return render(request, template_name, {'form': form})

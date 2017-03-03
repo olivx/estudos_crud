@@ -19,8 +19,10 @@ in front-end like angular but this is not my focus for now.
 - set pagination
 - create tests(i need more focus on this)
 - create model custom user
-- register with email adress
-- register with e-mail confirmation
+- custom register with email adress
+- custom register with e-mail confirmation
+- custom authentication form
+- custom confirm_login_allowed
 
 
 

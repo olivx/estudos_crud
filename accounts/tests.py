@@ -39,7 +39,8 @@ class TestUserProfile(TestCase):
 class TestRegisterForm(TestCase):
 
     def setUp(self):
-        self.form = RegisterForm(data={'username': 'thiago oliveira', 'email': 'oliveiravicente.net@gmail.com'})
+        self.form = RegisterForm(data={'username': 'thiago oliveira', 'email': 'oliveiravicente.net@gmail.com' ,
+                                       'password1': 'logan277', 'password2':'logan277'})
 
     def test_is_valid(self):
         '''test form register user is_valid '''
@@ -55,14 +56,6 @@ class TestRegisterForm(TestCase):
         user = self.form.save()
         self.assertEquals(user.username, 'thiago oliveira')
 
-    def test_form_save_password_blank(self):
-        '''test if password  save blank'''
-        user = self.form.save()
-        self.assertEquals(user.password, '')
 
-    def test_form_save_user_not_active(self):
-        '''test if user is not active'''
-        user = self.form.save()
-        self.assertFalse(user.is_active)
 
 
